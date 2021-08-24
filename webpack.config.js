@@ -5,24 +5,24 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, "src/index.js"),
-    form: path.join(__dirname, "src/form/form.js"),
-    topbar: path.join(__dirname, "src/assets/javascripts/topbar.js"),
+    main: path.join(__dirname, 'src/index.js'),
+    form: path.join(__dirname, 'src/form/form.js'),
+    topbar: path.join(__dirname, 'src/assets/javascripts/topbar.js'),
   },
   output: {
-    path: path.join(__dirname, "dist"),
-    filename: "[name].bundle.js",
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.js/,
         exclude: /(node_modules)/,
-        use: ["babel-loader"],
+        use: ['babel-loader'],
       },
       {
         test: /\.scss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -31,29 +31,28 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: "./src/assets/images/*",
+          from: './src/assets/images/*',
           to: 'assets/images/[name][ext]',
         },
       ],
     }),
     new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: path.join(__dirname, "./src/index.html"),
-      chunks: ["main", "topbar"],
+      filename: 'index.html',
+      template: path.join(__dirname, './src/index.html'),
+      chunks: ['main', 'topbar'],
     }),
     new HtmlWebpackPlugin({
-      filename: "form.html",
-      template: path.join(__dirname, "./src/form/form.html"),
-      chunks: ["form", "topbar"],
+      filename: 'form.html',
+      template: path.join(__dirname, './src/form/form.html'),
+      chunks: ['form', 'topbar'],
     }),
   ],
-  stats: "minimal",
-  devtool: "source-map",
-  mode: "development",
+  stats: 'minimal',
+  devtool: 'source-map',
+  mode: 'development',
   devServer: {
-    open: false,
-    contentBase: path.resolve(__dirname, './dist'),
-    inline: true,
+    static: path.resolve(__dirname, './dist'),
+    open: true,
     port: 4000,
   },
 };
